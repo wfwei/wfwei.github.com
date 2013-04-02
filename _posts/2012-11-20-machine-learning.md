@@ -4,6 +4,20 @@ title: "machine learning"
 category: posts
 ---
 
+## SVD奇异值矩阵分解
+
+* 抽取重要特征，应用：feature reduction（降维），数据压缩，潜在语义（Latent Semetic）
+* 特征值分解和奇异值分解目的是一样的，都是提取一个矩阵的重要特征
+* 特征值分解只能用于方阵，而奇异值分解可以用于任何矩阵
+* 基本概念：
+    * 特征值，特征向量 `A*v = lambda*v` 向量v是矩阵A的特征向量，lambda是特征值
+    * 分解：`A=Q*sigma*Q'` Q是矩阵A特征向量组成的矩阵，Q'是Q的逆矩阵，sigma是由矩阵A的特征值组成的对角阵
+
+
+
+
+* 特征值分解？
+
 ##n-gram->language modeling->Markov property->Markov chain->Brownian motion
 
 * n-gram:
