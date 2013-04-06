@@ -17,7 +17,7 @@ category:
     * 找出单独的数 
       现在给你2n+1个正整数,其中有n对数和1个单独的数,这里规定一对数的意思是这两个数相等,然后让你设计一种算法,把这个单独的数给找出来,要求时间复杂度为O(n). 
       很简单,把2n+1个数全部进行异或操作,最后得到的数就是那个单独的数.(利用了交换率)  
-      如果有2n+2个数呢？貌似以前的想法错了...
+      如果有两个单独的数怎么处理？**思路是转化为已知子问题***,[参考](http://blog.csdn.net/morewindows/article/details/8214003)
 
 3. 异或的另外一个神奇性质是满足消去率,即`a^c = b^c` ==> `a==b`.这个特性可以解决[Nim游戏](http://baike.baidu.com/view/1101962.htm)问题：    
     像Nim游戏这种博弈问题,最重要的是寻找必败态.这个必败态的的意思就是,这样一种局面摆在面前的话先手必败.其严格定义如下: 
@@ -56,9 +56,6 @@ Consider an if-statement: At the processor level, it is a *branch instruction*
 
 [full-ver](http://stackoverflow.com/questions/11227809/why-is-processing-a-sorted-array-faster-than-an-unsorted-array)
 
-
-
-
 ## Basic
 
 1. input 
@@ -74,4 +71,3 @@ Consider an if-statement: At the processor level, it is a *branch instruction*
   * __int64--long long
   * sprintf(str, "%d", num)
   * int main()...
-  * 
