@@ -4,6 +4,15 @@ title: "Algotithm Rel"
 category: 
 ---
 
+## 异或swap可能有bug的
+使用异或做swap可以省去tmp变量，但是却有隐藏的bug，比如参数是地址的时候...
+
+    void swap(int* a, int*b){
+      *a = *a^*b;  
+      *b = *a^*b;  
+      *a = *a^*b;  
+    }
+
 ## 神奇的异或运算
 1. 异或运算(Xor)是**位运算**的一种
 2. 具有交换率,结合率：`a^b^b = a^(b^b)= a^0= a`.这些性质有两个显著应用：

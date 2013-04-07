@@ -10,9 +10,14 @@ category: posts
   * 也就是说程序已经没有什么进展，一直在忙着回收垃圾，为了避免这种浪费，jvm抛出错误
 
 ## Hadoop 权限问题
-  * TODO hduser之外的账户不能跑hadoop，权限问题
+  * 刚搭建好hadoop，发现除hduser之外的账户不能跑hadoop，权限问题
+  * 需要用hduser账户把其他要运行hadoop程序的账户添加到hdfs上，具体方法是在hdfs上新建用户工作目录
+    
+    hadoop dfsadmin -safemode leave //关闭安全模式
+    hadoop fs -mkdir /user/uname // 创建用户工作目录
+    hadoop fs -chown -R uname:group /user/uname //修改权限
 
-## Connection refused TODO 原理还不懂
+## Connection refused 
 * hadoop突然不能跑了，报错大致如下:
 `Call to localhost/127.0.0.1:54310 failed on connection exception: java.net.ConnectException: Connection refused`
 使用`jps`一看，namenode没有启动，原来是自己删了hadoop.tmp.dir,之后没有重新格式化namenode，导致namenode启动不了，重新格式化，`hadoop namenode -format`后启动`start-all.sh`，成功~
