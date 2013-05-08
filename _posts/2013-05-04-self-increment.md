@@ -18,6 +18,7 @@ category: posts
 
 详见源码，字节码，汇编码如下:
 <pre>
+<code>
 plex@plex-R458:~/wksp/coding$ cat Test.java
 public class Test {
 
@@ -31,7 +32,6 @@ public class Test {
 	}
 
 }
-
 plex@plex-R458:~/wksp/coding$ javap -c Test
 Compiled from "Test.java"
 public class Test extends java.lang.Object{
@@ -118,6 +118,7 @@ Code:
   0xb464b0ef: .byte 0x0
 a:8
 b:11
+</code>
 </pre>
 
 ##C(++)    结果a:9 b:11 
