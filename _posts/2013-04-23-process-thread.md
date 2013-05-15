@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Process & Thread"
+title: "进程线程"
 category: posts
 ---
 
