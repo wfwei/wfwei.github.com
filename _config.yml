@@ -4,7 +4,7 @@ permalink: /posts/:title
 auto: true
 rdiscount:
   extensions: [smart]
-title : FENGWEI.WANG 
+title : List.The.World 
 production_url : http://wfwei.github.io
 description: "Througths, flamewars, utilities, tutorials, codes, projects and other things by FengweiWang."
 disqus_shortname: wfwei 

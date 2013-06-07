@@ -37,8 +37,13 @@ category:
 2. 具有交换率,结合率：`a^b^b = a^(b^b)= a^0= a`.这些性质有两个显著应用：
 
     * 两数交换
-      void swap(int a, int b){
-        a=a^b; b=a^b; a=a^b;
+      void swap(int *a, int *b){
+          //当a==b时，为置零!!!
+          if(a!=b){
+              *a=*a^*b;
+              *b=*a^*b;
+              *a=*a^*b;
+          }
       }
 
     * 找出单独的数 
