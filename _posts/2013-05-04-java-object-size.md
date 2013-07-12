@@ -11,19 +11,19 @@ category: posts
 这里的变量都是成员变量，类变量或常量都会放在运行时常量池（方法区的一部分）
     * 对象头：包括对象的类型信息，ID以及一些状态位，一般是8字节(数组要8+4=12字节，4字节是存放数组长度length)
     * primitive类型:
-      <pre>
-          <table border="">
-            <tbody><tr><th>Java type</th><th>Bytes required</th></tr>
-            <tr><td><tt>boolean</tt></td><td rowspan="2">1</td></tr>
-            <tr><td><tt>byte</tt></td></tr>
-            <tr><td><tt>char</tt></td><td rowspan="2">2</td></tr>
-            <tr><td><tt>short</tt></td></tr>
-            <tr><td><tt>int</tt></td><td rowspan="2">4</td></tr>
-            <tr><td><tt>float</tt></td></tr>
-            <tr><td><tt>long</tt></td><td rowspan="2">8</td></tr>
-            <tr><td><tt>double</tt></td></tr>
-          </tbody></table>
-      </pre>
+
+        <table border="">
+          <tbody><tr><th>Java type</th><th>Bytes required</th></tr>
+          <tr><td><tt>boolean</tt></td><td rowspan="2">1</td></tr>
+          <tr><td><tt>byte</tt></td></tr>
+          <tr><td><tt>char</tt></td><td rowspan="2">2</td></tr>
+          <tr><td><tt>short</tt></td></tr>
+          <tr><td><tt>int</tt></td><td rowspan="2">4</td></tr>
+          <tr><td><tt>float</tt></td></tr>
+          <tr><td><tt>long</tt></td><td rowspan="2">8</td></tr>
+          <tr><td><tt>double</tt></td></tr>
+        </tbody></table>
+
     * 引用变量：4字节
     * Padding填补：一个对象大小需要是8的整倍数
 * 一般例子：
