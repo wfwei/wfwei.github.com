@@ -4,14 +4,18 @@ title: "python learning"
 category: posts
 ---
 
-1. easy_install & pip to install python packages
+### install numpy on windows
+just use [exe installer](http://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy)
 
-use `pip uninstall <package>` to remove package
-use `pip freeze` to list installed packages
+###easy_install & pip to install python packages
 
-[stackoverflow](http://stackoverflow.com/questions/1231688/how-do-i-remove-packages-installed-with-pythons-easy-install)
+* use `pip uninstall <package>` to remove package
 
-2. file encoding etc.
+* use `pip freeze` to list installed packages
+
+* [more](http://stackoverflow.com/questions/1231688/how-do-i-remove-packages-installed-with-pythons-easy-install)
+
+###file encoding etc.
 
 Rather than mess with the encode, decode methods I find it easier to use the open method from the codecs module.
 
@@ -21,6 +25,5 @@ Rather than mess with the encode, decode methods I find it easier to use the ope
     f.write(var)
     f.flush()
     f.read()
-[stackoverflow](http://stackoverflow.com/questions/491921/unicode-utf8-reading-and-writing-to-files-in-python)
 
-3
+[more](http://stackoverflow.com/questions/491921/unicode-utf8-reading-and-writing-to-files-in-python)
