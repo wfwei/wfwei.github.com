@@ -4,6 +4,30 @@ title: "hadoop startup"
 category: posts
 ---
 
+## 关于Hadoop
+* Hadoop 是一个实现了MapReduce 计算模型的开源分布式并行编程框架
+* Hadoop = HDFS+ MapReduce
+* Hadoop HDFS
+  * Google GFS存储系统的开源实现
+  * 作为并行计算环境（MapReduce）的基础组件，同时也是BigTable（如HBase、HyperTable）的底层分布式文件系统。
+  * master/slave架构，HDFS集群是有由一个Namenode和一定数目的Datanode组成。
+  * Namenode是一个中心服务器，负责管理文件系统的namespace和客户端对文件的访问。
+  * Datanode在集群中一般是一个节点一个，负责管理节点上它们附带的存储。
+* Hadoop MapReduce
+  * 一个MapReduce作业（job）通常会把输入的数据集切分为若干独立的数据块
+  * Map任务（task）以完全并行的方式处理它们
+  * 框架会对Map的输出先进行排序，然后把结果输入给Reduce任务
+  * 通常作业的输入和输出都会被存储在文件系统中
+* Hive
+  * 基于Hadoop的一个数据仓库工具，处理能力强而且成本低廉 
+  * 将结构化的数据文件映射为一张数据库表
+  * 提供类SQL语言，实现完整的SQL查询功能
+  * 可以将SQL语句转换为MapReduce任务运行，十分适合数据仓库的统计分析
+  * 采用__行__存储的方式（SequenceFile）来存储和读取数据，效率低
+* HBase
+  * 分布式、面向__列__的开源数据库
+  * 适合于非结构化数据存储
+
 ## java.lang.OutOfMemoryError: GC overhead limit exceeded
   * 在hadoop上跑canopy聚类的时候，发生错误`java.lang.OutOfMemoryError: GC overhead limit exceeded`,虽然继续运行，但是后来又抛出`heap size overflow`，可见是程序占用堆空间太多，又释放不掉的缘故
   * 这个错误主要是说，GC一直在忙着回收堆上的垃圾，占用大量cpu(>98%)，但是回收效率极低(<2%)
