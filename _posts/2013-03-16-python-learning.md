@@ -4,6 +4,9 @@ title: "python learning"
 category: posts
 ---
 
+###Basic Usage
+* python -c "import django; print(django.get_version())"
+
 ### install numpy on windows
 just use [exe installer](http://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy)
 
