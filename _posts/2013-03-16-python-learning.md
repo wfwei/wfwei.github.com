@@ -30,3 +30,7 @@ Rather than mess with the encode, decode methods I find it easier to use the ope
     f.read()
 
 [more](http://stackoverflow.com/questions/491921/unicode-utf8-reading-and-writing-to-files-in-python)
+
+###[语言规范](http://zh-google-styleguide.readthedocs.org/en/latest/google-python-styleguide/python_language_rules/)
+
+
