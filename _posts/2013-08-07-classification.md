@@ -112,9 +112,13 @@ $$\max_{\alpha}\;\min_{w,b}\;L(w, b, \alpha) = d^* $$
 
 交换后的问题不再等价与原问题，称为原始问题的对偶问题，其最优值记为$$d^*$$
 
-直观上，可以看出$$d^* \leq p^*$$，需考虑再
+直观上，可以看出$$d^* \leq p^*$$，称为弱对偶，其实对于SVM，$$d^* = p^*$$，称为强对偶
 
-这样，对偶问题的最优值$$d^*$$，为原始问题的最优值$$p^*$$的下界，同时，当问题满足KKT条件的时候，二者相等
+如果原始问题是 Convex 的并且满足 Slater 条件的话，那么 strong duality 成立（充分条件）
+
+Slater条件是指存在严格满足约束条件的点
+
+还有KKT条件。。。
 
 ##对偶问题的计算
 
@@ -310,9 +314,6 @@ $$\sum_{i=1}^n\alpha_iy_i = 0 \Rightarrow \alpha_2=\frac{1}{y_2}\left(\sum_{i=3}
 
 
 SMO使用一些启发式策略来选取最优的两个坐标维度，可以参见 John C. Platt 的那篇论文 Fast Training of Support Vector Machines Using Sequential Minimal Optimization
-
-
-
 
 ##参考
 1. 统计机器学习-李航博士
