@@ -225,12 +225,29 @@ $$k(x_1,x_2)=\left(\langle x_1, x_2\rangle + 1\right)^2$$
 
 核函数能简化映射空间中的__内积运算__——刚好“碰巧”的是，SVM里需要计算的地方，数据向量总是以内积的形式出现的。
 
+因此SVM中的优化问题和决策平面改写为核函数的形式分别为：
+
+决策面函数:
+
+$$
+f(x) = \sum_{i=1}^n\alpha_i y_i k(x_i, x) + b
+$$
+
+优化问题:
+
+$$
+\begin{align} 
+\max_\alpha &\sum_{i=1}^n\alpha_i - \frac{1}{2}\sum_{i,j=1}^n\alpha_i\alpha_jy_iy_jk(x_1,x_2) \\ 
+s.t., &0\leq \alpha_i\leq C, i=1,\ldots,n \\ 
+&\sum_{i=1}^n\alpha_iy_i = 0 
+\end{align}
+$$
+
 常见的核函数有：
 
 1. 多项式核: $$\kappa(x_1,x_2) = \left(\langle x_1,x_2\rangle + R\right)^d$$
 2. 高斯核: $$\kappa(x_1,x_2) = \exp\left(-\frac{\|x_1-x_2\|^2}{2\sigma^2}\right)$$
 3. 线性核: $$\kappa(x_1,x_2) = \langle x_1,x_2\rangle$$
-
 
 ##异常点Outliers
 
@@ -290,28 +307,60 @@ $$
 
 ##数值优化--SMO算法
 
-求解上面的对偶问题，SVM使用了高效的Sequential Minimal Optimization (SMO) 算法
+求解上面的对偶问题，SVM使用了高效的Sequential Minimal Optimization (SMO) 算法，其基本思路是：
+
+如果所有变量的解都满足优化问题的KKT条件，那么这个优化问题的最优解得到了(KKT条件是优化问题的充要条件)；
+
+否则，选取两个变量，固定其他的，针对这两个变量构建一个二次规划问题
 
 该算法是对坐标下降算法( Coordinate Descend )的扩展
 
-坐标下降法的原理是每次选取一个维度进行优化，比如求梯度，不断向梯度的反方向移动，即可不断靠近最优值
+坐标下降法的原理是每次选取一个维度进行优化，比如求梯度，不断向梯度的反方向移动，即不断靠近最优值
 
 考虑这里对偶变量的限制:$$ \sum_{i=1}^n\alpha_iy_i = 0 $$，如果每次选取一个维度$$\alpha_i$$进行优化，其他变量$$\alpha_j(j \neq i)$$视为变量，这样优化是没效果的，因为$$\alpha_i$$是确定的
 
-所以，SMO每次每次选择两个坐标维度进行优化，因此每一个迭代步骤实际上是一个可以直接求解的一元二次函数极值问题，求解高效
+所以，SMO每次每次选择两个坐标维度进行优化，(其中一个是违反KKT条件最严重的)，每个迭代步骤实际上是一个可以直接求解的一元二次函数极值问题，因此迭代高效
 
-比如，选取 α1 和 α2 为变量，其余为常量，则根据约束条件我们有：
+下面以选取α1和α2为变量，其余为常量为例，详细描述求解过程：
 
-$$\sum_{i=1}^n\alpha_iy_i = 0 \Rightarrow \alpha_2=\frac{1}{y_2}\left(\sum_{i=3}^n\alpha_iy_i-\alpha_1y_1\right) \triangleq y_2\left(K-\alpha_1y_1\right)$$
+待解决的对偶问题描述为：
 
-其中那个从3到n的累加由于都是常量，记作K；由于y∈{−1,+1}，所以y2和1/y2是一样的。
+$$
+\begin{align} 
+\max_\alpha &\sum_{i=1}^n\alpha_i - \frac{1}{2}\sum_{i,j=1}^n\alpha_i\alpha_jy_iy_jk(x_1,x_2) \\ 
+s.t., &0\leq \alpha_i\leq C, i=1,\ldots,n \\ 
+&\sum_{i=1}^n\alpha_iy_i = 0 
+\end{align}
+$$
 
-将这个式子带入原来的目标函数中，可以消去α2，从而变成一个一元二次函数
+选取$$\alpha_1, \alpha_2$$为变量，固定其他$$\alpha_i~(i > 2)$$后得：
+
+$$
+\begin{align}
+\max_{\alpha_1, \alpha_2} W(\alpha_1, \alpha_2) \\
+W(\alpha_1, \alpha_2) = 
+\alpha_1 + \alpha_2 - K_{11}\alpha_1^2-K_{22}\alpha_2^2-y_1y_2K_{12}\alpha_1\alpha_2 \\
+- y_1\alpha_1\sum_{i=3}^N y_i\alpha_iK_{i1} - y_2\alpha_2\sum_{i=3}^N y_i\alpha_iK_{i2} \\
+s.t. ~&~ \alpha_1y_1 + \alpha_2y_2 = -\sum_{i=3}^{N}y_i\alpha_i = \zeta \\
+~&~ 0 \leq \alpha_1,\alpha_2 \leq C
+\end{align}
+$$
+
+其中，$$K_{ij} = k(x_i,x_j)$$
+
+因为$$\alpha_2 = \frac{1}{y_2} ( \zeta-\alpha_1y_1 ) \overset{y_2=-1,1}{==} y_2\left(\zeta-\alpha_1y_1\right)$$，将其带入目标函数可以消去α2，从而变成关于α1的一元函数，直接根据导数求极值
+
+求导化简过程复杂，结果是：
+
+$$
+\alpha_1^{new} = \alpha_1^{old} + \frac{ y_1(E_2 - E_1) }{K_{11}+K_{22}-2K_{12}}
+$$
+
+其中 $$ E_i = f(x_i)-y_i = (\sum_{j=1}^n\alpha_j y_j k(x_j, x_i) + b) - y_i $$
 
 ![svm-smo-alpha](/image/svm-smo-alpha.png)
 
 上图中红色线段为解范围
-
 
 SMO使用一些启发式策略来选取最优的两个坐标维度，可以参见 John C. Platt 的那篇论文 Fast Training of Support Vector Machines Using Sequential Minimal Optimization
 
