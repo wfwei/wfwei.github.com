@@ -4,7 +4,7 @@ title: "classification"
 category: posts
 ---
 
-分类的基本算法有
+##分类的基本算法有
 
 1. 非优化模型： 最近邻算法(kNN)，贝叶斯(Bayes)，决策树(DecisionTree)
 2. 优化模型：感知机(Perceptron)，逻辑回归(LogisticRegression)，支持向量机(SVM)
@@ -363,6 +363,10 @@ $$
 上图中红色线段为解范围
 
 SMO使用一些启发式策略来选取最优的两个坐标维度，可以参见 John C. Platt 的那篇论文 Fast Training of Support Vector Machines Using Sequential Minimal Optimization
+
+##TODO
+1. 区分一下：分离超平面方程，分类决策函数，对偶问题
+2. 线性支持向量机的最优解w*是唯一的，但b*却不唯一
 
 ##参考
 1. 统计机器学习-李航博士

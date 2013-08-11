@@ -95,6 +95,7 @@ ul.listing li span {
 
 div.navbar .navbar-inner{
   text-align:center;
+  opacity:0.8;
 }
 div.navbar .navbar-inner .title{
   display: block;
