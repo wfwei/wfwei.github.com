@@ -1,11 +1,6 @@
 html,
 body {
-  font-family: 'Microsoft YaHei', sans-serif;
-  font-size:20px;
-  line-height:35px;
-}
-body {
-  padding-top: 50px;
+  font-size:18px;
 }
 h1,h2,h3,h4,h5,h6 {
   font-weight: 100;
@@ -98,8 +93,15 @@ ul.listing li span {
   color: #999;
 }
 
-div.navbar .navbar-inner a.brand {
-  font-weight: 60;
+div.navbar .navbar-inner{
+  text-align:center;
+  opacity:0.8;
+}
+div.navbar .navbar-inner .title{
+  display: block;
+  margin-top:8px;
+  font-size:24px;
+  color:#0088cc;
 }
 #footer {
   margin-top: 50px;
