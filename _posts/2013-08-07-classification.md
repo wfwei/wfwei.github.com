@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "classification"
+title: "分类问题"
 category: posts
 ---
 
@@ -33,24 +33,45 @@ $$ L(w,b)=-\sum_{x_i\in M}y_i(w^Tx_i+b) $$
 
 逻辑回归是在感知机模型上加了Logistic函数映射：
 
-$$ Logistic(x)= \frac{1}{1+exp(x)} $$
+$$ Logistic(x)= \frac{1}{1+exp(-x)} $$
 
 Logistic函数值域为(0,1)，因此，类别用0,1表示，即$$y_i=0,1$$
+
+logistic函数起到了数据归一化作用，有效地打压了过大或过小的结果
 
 由于Logistisc函数非线性，如果使用最小二乘去求解，计算复杂
 
 __因此逻辑回归根据最大熵原理，使用极大似然做参数估计__:
 
 似然函数为:   
+
 $$ max ~ \prod_{i=1}^{N} [P(Y=1|x_i)]^{y_i}[P(Y=0|x_i)]^{1-y_i} $$
 
-其中:   
-$$ P(Y=1|x)=Logistic(w^Tx)  P(Y=0|x)=1-P(Y=1|x) $$
+其中$$ {\color{Red} P(Y=1|x)=Logistic(w^Tx)} $$ ，相应的 $$ P(Y=0|x)=1-P(Y=1|x) $$
+
+可以看出，似然函数的设计巧妙的实现了所有数据出现的概率的乘积(之所以是乘积而不是累加是为了使用对数做简化)
+
+对于条件概率$$P(Y=1|x)=Logistic(w^Tx)$$，不是很好理解，我认为Logistic函数本身的值域是(0,1)，所以很适合做概率函数，甚至在李航博士的书中就是用这个条件概率来定义二项逻辑回归问题的
+
 
 化简后得:   
+
 $$ max ~ \sum_{i=1}^{N} [y_i(w^Tx_i)-log(1+exp(w^Tx_i))] $$
 
-之后使用梯度下降或牛顿法求最优值
+令 $$L(w) = \sum_{i=1}^{N} [y_i(w^Tx_i)-log(1+exp(w^Tx_i))] $$
+
+对w求偏导得：
+
+$$
+\begin{align}
+\frac{\partial L(w)}{\partial w} 
+&= \sum_{i=1}^{N} (y_ix_i - \frac{x_iexp(wx_i)}{1+exp(wx_i)})\\
+&= \sum_{i=1}^{N} (y_i - \frac{1}{1+exp(-wx_i)})x_i\\
+&= \sum_{i=1}^{N} (y_i - logistic(wx_i))x_i
+\end{align}
+$$
+
+可见偏导数结构简单，容易计算，之后使用梯度下降或牛顿法求最优值
 
 ##支持向量机
 
