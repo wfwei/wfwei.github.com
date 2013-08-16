@@ -4,7 +4,7 @@ permalink: /posts/:title
 auto: true
 rdiscount:
   extensions: [smart]
-title : Simple Notes 
+title :  Note.Markdown
 production_url : http://wfwei.github.io
 disqus_shortname: wfwei 
 analytics: UA-30211938-1
