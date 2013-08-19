@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "nutch leaning"
+title: "Nutch"
 categories: [tool, crawler]
 ---
 

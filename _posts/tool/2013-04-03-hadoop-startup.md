@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "hadoop startup"
+title: "Hadoop"
 categories: [tool, hadoop]
 ---
 

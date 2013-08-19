@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "分解的思想求解Trapwater问题"
-categories: [programming, algorithm]
+categories: [programming, algorithm, leetcode]
 ---
 
 [LeetCode](http://leetcode.com/onlinejudge#question_13)解题报告，感觉这个题目的思路很好，可以举一反三，所以就记录一下～
