@@ -21,7 +21,11 @@ section.content p {
   line-height:150%
 }
 section table {
-  margin:10px;
+  width: 80%;
+  margin-bottom: 18px;
+}
+section table tr {
+  border-bottom: 2px solid #bbb;
 }
 section.content {
   height: 100%;
