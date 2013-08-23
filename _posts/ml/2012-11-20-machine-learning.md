@@ -34,7 +34,7 @@ categories: [ml, clustering, classification, recommendation]
     * http://blog.pluskid.org/?p=17&cpage=1
     * http://coolshell.cn/articles/7779.html
 
-## 分类问题
+## [分类问题](/posts/classfication/)
 * 决策树(DecisionTree) 
     * 决策树是一个树形结构，每个非叶子节点表示一个特征属性上的测试，每个分支代表这个属性在不同值域上的输出，最终每个叶子存放一个类别
     * 天生适合多分类问题，具有可表示性，分类速度快
