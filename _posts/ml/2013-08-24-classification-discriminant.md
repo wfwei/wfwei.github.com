@@ -1,15 +1,10 @@
 ---
 layout: post
-title: "监督学习(二)：分类问题"
+title: "监督学习(二)：判别分类问题"
 categories: [ml, classification]
 ---
 
 这篇笔记主要记载**感知机，逻辑回归以及SVM**的概念和推导
-
-##分类的基本算法有
-
-1. 非优化模型： 最近邻算法(kNN)，贝叶斯(Bayes)，决策树(DecisionTree)
-2. 优化模型：感知机(Perceptron)，逻辑回归(LogisticRegression)，支持向量机(SVM)
 
 ##感知机
 
