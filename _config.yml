@@ -9,7 +9,7 @@ production_url : http://wfwei.github.io
 disqus_shortname: wfwei 
 analytics: UA-30211938-1
 gauges: 
-author :
+author : wfwei
   name : FengweiWang
   github : wfwei 
   twitter : wfwei

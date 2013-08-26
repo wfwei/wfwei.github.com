@@ -49,7 +49,7 @@ $$
 
 使用GDA的密度函数计算Y关于X的概率函数`P(Y=1|X)`得：
 
-$$P(Y=1 \mid X; \phi, \mu_0, \mu_1, \Sigma) \sim \frac{1}{1 + exp( - \theta^T x \} $$
+$$ P(Y=1 \mid X; \phi, \mu_0, \mu_1, \Sigma) \sim \frac{1}{1 + exp( - \theta^T x) } $$
 
 和逻辑回归判别函数的形式是一致的
 
