@@ -54,42 +54,7 @@ $$ J(\theta) = \frac{1}{2} \sum_{i=1}^{m} ( h_\theta(x^{(i)}) - y^{(i)}  )^2 $$
 
 搜索求解上面的最小化问题，开始初始化$$\theta$$(比如$$\frac{1}{n}$$)，不断改变$$\theta$$的值，使$$J(\theta)$$变小
 
-具体算法包括：梯度下降和牛顿法
-
-梯度下降(Gradient Descent GD)算法
-
-使$$\theta$$想梯度反方向变化，即: $$\theta_j := \theta_j - \alpha \frac{\partial J(\theta)}{\partial \theta_j} $$
-
-其中 $$\alpha$$ 是学习速率，$$\frac{\partial J(\theta)}{\partial \theta_j} = (h_\theta(x) - y) x_j $$
-
-根据迭代方式的不同，梯度下降又分为梯度下降(Batch GD)和随机梯度下降(Stochastic GD)
-
-1. 梯度下降：每次迭代都要遍历所有训练数据计算梯度
-
-
-$$
-\text{Repeat until convergence \{ }\\
-~~~~~~~~~~~~~~~\theta_j := \theta_j - \alpha \sum_{i=1}^{m} (h_\theta(x^{(i)})-y^{(i)})x_j^{(i)}\\
-~~~~~~\text{\}}
-$$
-
-2. 随机梯度下降：每次迭代只遍历单个训练数据
-
-$$
-\text{Repeat until convergence \{ }\\
-~~~~~~~~~~~\text{for i=1 to m  \{ }\\
-~~~~~~~~~~~~~~~\theta_j := \theta_j - \alpha (h_\theta(x^{(i)})-y^{(i)})x_j^{(i)}\\
-~~~~~~~~~~~\text{\}}\\
-~~~~~~\text{\}}
-$$
-
-3. 中和上面两种，每次使用k个训练数据更新参数，即是另一种方法：miniBatch GD
-
-梯度下降和随机梯度下降的比较：
-
-1. 计算代价，梯度下降每次迭代都要遍历所有训练数据，因此，大数据下，随机梯度下降较常用
-2. 收敛速度，随机梯度下降算法快一些，但可能永远无法收敛
-3. 局部最优，二者都可能
+具体算法包括：[梯度下降](/posts/gradient-descent/)和[牛顿法](/posts/newton-method/)
 
 ####2. The Normal Equations 等式求解
 
@@ -147,10 +112,10 @@ $$
 则有:
 
 $$
-p(y^{(i)}|x{(i)};\epsilon^{(i)})=\frac{1}{\sqrt{2\pi} \sigma} exp\{ - \frac{( y^{(i)}-\theta^Tx^{(i)} )^2}{2\sigma^2} \}
+p(y^{(i)} \mid x{(i)};\epsilon^{(i)})=\frac{1}{\sqrt{2\pi} \sigma} exp\{ - \frac{( y^{(i)}-\theta^Tx^{(i)} )^2}{2\sigma^2} \}
 $$
 
-其中，$$p(y^{(i)}|x{(i)};\epsilon^{(i)})$$表示$$y^{(i)}$$关于$$x^{(i)}$$的条件概率，$$\theta$$是参数，而不是变量！
+其中，$$p(y^{(i)} \mid x{(i)};\epsilon^{(i)})$$ 表示 $$y^{(i)}$$ 关于 $$x^{(i)}$$ 的条件概率，$$\theta$$ 是参数，而不是变量！
 
 在训练数据集上使用极大似然估计得：
 
