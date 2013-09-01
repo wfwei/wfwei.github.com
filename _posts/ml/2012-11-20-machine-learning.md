@@ -4,16 +4,15 @@ title: "机器学习(ML)"
 categories: [ml, clustering, classification, recommendation]
 ---
 
-## 聚类
-1. 聚类问题综述
-    * 所有的聚类问题可以转化为优化问题：[聚类优化问题](!cluster_opt_fun.png)
-2. 华盖聚类(Canopy)
+### 聚类
+
+1. 华盖聚类(Canopy)
     * 不需指定聚类个数，设置两个相似度阈值(T1 < T2)
     * 开始将所有点放到list中，循环该list，计算每个点和当前聚类的距离
         * 小于T1则放到该聚类中，并从list中删除该点
         * 小于T2大于T1,则该点暂时加入该类，但不从list中删除
         * 如果距离大于T2,则开辟一个新的类。
-3. KMeans聚类
+1. KMeans聚类
     * 需要指明分类个数k，适用于类别以‘__点群__’分布的数据 [点群分布](!KMeans.gif)
     * 随机k个点作为初始分类中心
         * 计算所有点到每个聚类中心的距离，选择最小的作为该点的类别
@@ -28,9 +27,9 @@ categories: [ml, clustering, classification, recommendation]
                 * 先随机选第一个初始种子点
                 * 计算剩余点到种子点的距离(选最小的)，以这些距离为权重(正相关)，在剩余点中选下一个种子点
                 * 重复上面过程，直到选取K个种子点，之后再进行KMeans聚类
-4. KCentroid聚类
+1. KCentroid聚类
 
-5. 参考
+1. 参考
     * http://blog.pluskid.org/?p=17&cpage=1
     * http://coolshell.cn/articles/7779.html
 
@@ -135,9 +134,3 @@ categories: [ml, clustering, classification, recommendation]
     * 切换混合,对于不同的情况（数据量，系统运行状况，用户和物品的数目等），推荐策略不同
     * 分区混合,采用多种推荐机制，并将不同的推荐结果分不同的区显示给用户
     * 分层混合,采用多种推荐机制，并将一个推荐机制的结果作为另一个的输入，从而综合各个推荐机制的优缺点，得到更加准确的推荐
-
-## 基本概念
-1. 正则化(Regularization) vs 归一化(Normalization)
-    * 根据奥卡姆剃刀原理，为了防止过拟合，在损失函数上加上一个__惩罚__项，即正则化
-    * 防止梯度下降慢，将所有数据范围归一化处理在0-1之间:` Xi' = (Xi-avg(X)) / (max(X)-min(X)) `
-    * http://sobuhu.com/ml/2012/12/29/normalization-regularization.html

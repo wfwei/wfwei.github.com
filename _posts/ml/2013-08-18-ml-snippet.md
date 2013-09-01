@@ -6,6 +6,12 @@ categories: [ml, snippets]
 
 摘录统计机器学习相关的一些碎片知识
 
+
+###正则化(Regularization) vs 归一化(Normalization)
+    * 根据奥卡姆剃刀原理，为了防止过拟合，在损失函数上加上一个**惩罚项**，即**正则化**
+    * 防止梯度下降慢，将所有数据范围归一化处理在0-1之间:` Xi := (Xi-avg(X)) / (max(X)-min(X)) `
+    * http://sobuhu.com/ml/2012/12/29/normalization-regularization.html
+
 ###泛化界某定理
 
 >A random variable that depends(in a "smooth way") on the influence of many independentvariables(But not too much on any of them) is essentially constant
