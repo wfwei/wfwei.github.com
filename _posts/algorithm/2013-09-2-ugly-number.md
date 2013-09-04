@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "丑数UglyNumber"
-categories:  [programming, algorithm]
+categories:  [algorithm]
 ---
 
 丑数：因子中只包含`2``3``5`的数，习惯上将`1`作为第一个丑数

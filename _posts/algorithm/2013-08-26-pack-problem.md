@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "背包问题"
-categories: [programming, algorithm]
+categories: [algorithm, pack]
 ---
 
 背包问题，[背包九讲](http://cuitianyi.com/Pack/P01.html)的笔记，所有代码参见我的[Gist](https://gist.github.com/wfwei/6342360)

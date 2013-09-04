@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "bloom filter"
-categoring: [programming, hash]
+title: "Bloom Filter"
+categories: [algorithm, hash]
 ---
 
 [本文参考](http://www.cnblogs.com/allensun/archive/2011/02/16/1956532.html) 

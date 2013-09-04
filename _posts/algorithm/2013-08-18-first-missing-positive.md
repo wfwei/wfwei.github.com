@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "First Missing Positive"
-categories: [programming, algorithm, leetcode]
+categories: [algorithm, leetcode]
 ---
 
 [LeetCode](http://leetcode.com/onlinejudge#question_41) 解题报告，这个题目开始弄了一个bigmap过了，后来发现更好解法，值得反思
@@ -33,7 +33,7 @@ Your algorithm should run in O(n) time and **uses constant space**.
 
 后来无意中看到一个[博客](http://www.cnblogs.com/AnnieKim/archive/2013/04/21/3034631.html)，其想法给我很大启示～～
 
-核心思想还是‘计数排序’，只不过利用了该题目的一个限制：**最小的缺失正整数肯定小于等于数组长度！**
+核心思想还是‘计数排序’，只不过利用了该题目的一个隐含条件：**最小的缺失正整数肯定小于等于数组长度！**
 
 这个限制很容易证明（比如用反证法），但我开始还是没观察到==！
 

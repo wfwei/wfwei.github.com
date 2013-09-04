@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "递归和回朔"
-categories: [programming, algorithm, recursive]
+categories: [algorithm, recursive]
 ---
 
 下面程序是数读求解的核心代码，里面用到了递归和回朔以及终止回朔，详见注释～

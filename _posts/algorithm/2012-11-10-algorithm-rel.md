@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Algotithm Rel"
-categories: [programming, algorithm] 
+categories: [algorithm] 
 ---
 
 ## 卡特兰数(Catalan)

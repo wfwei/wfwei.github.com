@@ -1,11 +1,63 @@
 ---
 layout: post
-title: "Java备忘"
+title: "Java 经验积累"
 categories: [skill, java]
 ---
-### Misc
+
+记录Java的常用技巧
+
+
 1. Java中没有逗号运算符
+
+### 自动装箱技术和容器类
+
+先看测试代码
+
+    ArrayList<Integer> list = new ArrayList<Integer>();
+    list.add(2); // 自动装箱
+    // list.remove(2); //出错 
+    list.remove(new Integer(2)); // OK
+
+ArrayList中的remove方法有两个重载方法
+    
+    //Removes the first occurrence of the specified element from this list, if it is present.
+    public boolean remove(Object o);
+
+    //Removes the element at the specified position in this list. Shifts any subsequent elements to the left (subtracts one from their indices).
+    public E remove(int index);
    
+还有一点更像是java的陷阱：
+
+java中有很多final和immutable类(关键是重写了equals方法)，使用ArrayList的remove(object)方法时很容易弄错，还是看测试代码：
+
+    ArrayList<Integer> list = new ArrayList<Integer>();
+    list.add(new Integer(2));
+    list.add(new Integer(1));
+    list.add(new Integer(2));
+    list.remove(new Integer(2)); // 假设你想删除刚add进去的2时，结果会令你意外的 ==！
+    System.out.println(list); // result: 1 2
+
+测试代码中用的是Integer类，其他primitive类型的封装类也是如此，还有字符串String也有问题
+
+问题的根源在于remove(object)方法是从头遍历，找到第一个和目标对象相同的删掉，其中比较用的对象的equals方法，Integer类的equals方法如下：
+
+
+    public boolean equals(Object obj) {
+        if (obj instanceof Integer) {
+            return value == ((Integer)obj).intValue(); //可以看出比较的只是‘数值’
+        }
+        return false;
+    }
+
+equals方法继承于Object类中，在Object类中，equals方法比较的是**两个对象的引用的‘地址’**，当且仅当两个引用只向同一个对象或都为空，该函数返回true
+
+    public boolean equals(Object obj) {
+        return (this == obj);
+    }
+
+额，有引用了大量源码。。。
+
+
 ###容器排序
 
 List
