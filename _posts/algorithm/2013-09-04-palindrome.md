@@ -28,8 +28,6 @@ categories: [algorithm, java]
 		return true;
 	}
 
-TODO 因为用了几个java内置的函数，平时用的比较少，这里还有点不太明白：`Character.isLetter()`和`Character.isCharacter()`有啥区别？ 
-
 代码很短，这是参考的别人的代码，其实自己开始的思路也挺好的：
 
     public class ValidPalindrome {

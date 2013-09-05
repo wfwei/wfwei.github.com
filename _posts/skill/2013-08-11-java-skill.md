@@ -6,8 +6,27 @@ categories: [skill, java]
 
 记录Java的常用技巧
 
+>Java中没有逗号运算符
 
-1. Java中没有逗号运算符
+### java中的‘引用传递’
+
+最近写递归程序经常要回朔变量的状态，这时候，如果变量不是Immutable的，就一定要注意要构建新对象
+
+    public void tranverse(TreeNode root, int sum, 
+        ArrayList<Integer> cur, ArrayList<ArrayList<Integer>> res){
+        if(root!=null){
+            sum -= root.val;
+            cur.add(root.val);
+            if(root.left==null && root.right==null && sum==0){
+                // find one path
+                res.add(new ArrayList<Integer>(cur)); // WARN: remeber to construct new object
+            } else {
+                tranverse(root.left, sum, cur, res);
+                tranverse(root.right, sum, cur, res);
+            }
+            cur.remove(cur.size()-1); // WARN: 回朔对象状态
+        }
+    }
 
 ### 自动装箱技术和容器类
 
@@ -140,8 +159,7 @@ java中参数传递都可以看成值传递，primivte的参数就不用说了�
         Character.UnicodeBlock ub = Character.UnicodeBlock.of(c);
         if (ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS
             || ub == Character.UnicodeBlock.CJK_COMPATIBILITY_IDEOGRAPHS
-            || ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A
-            || ub == Character.UnicodeBlock.GENERAL_PUNCTUATION
+            || ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A || ub == Character.UnicodeBlock.GENERAL_PUNCTUATION
             || ub == Character.UnicodeBlock.CJK_SYMBOLS_AND_PUNCTUATION
             || ub == Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS) {
             return true;
