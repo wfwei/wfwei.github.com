@@ -4,7 +4,44 @@ title: "Hadoop"
 categories: [tool, hadoop]
 ---
 
-## 关于Hadoop
+Hadoop 权威指南 笔记
+
+### 初识Hadoop
+
+#### 大量数据产生,磁盘容量增长快速的同时，访问速度却未能与时俱进
+
+>1TB的数据，传输速度100M/s，大概需要2个小时
+
+一个简单思路是将数据放到多个不同磁盘上，同时读取，可以缩短读取时间
+
+>使用100个磁盘，每个磁盘存放1%的数据，同时读取的话，只需要2分钟
+
+这样又出现新的问题：
+
+1. 如何解决高频硬件故障：硬件增加后，系统发生故障的概率就大大增加，需要做好系统恢复机制，hadoop的分布式文件系统能很好的handle这个
+2. 如何有效利用多个磁盘上的数据：MapReduce这种分布式编程框架，允许结合多个数据源的数据进行运算，且保证正确性
+
+####寻址时间的提高远远慢于传输速度的提高
+
+> 寻址时间是将磁头移动到特定磁道的过程，是磁盘操作延迟的主要原因
+
+Hadoop使用大量的流式文件读取，其读取速度取决与磁盘速度
+
+传统的关系型数据库使用B树做数据存储，在少量数据更新时，B树的效率较高，但数据库系统更新大部分数据时，B树的效率就远不及MapReduce了，因为其还需要‘排序/归并’来重建数据库
+
+这也是为什么hdfs的块非常大（一般64M）的原因
+
+####MapReduce vs MPI
+
+消息传递接口(Message Passing Interface, MPI)
+
+### 关于 MapReduce
+
+MapReduce是一种用于数据处理的编程模型，其优势在于处理大规模数据集
+
+MapReduce任务被分成两个阶段：map阶段和reduce阶段。每个阶段都已键值对作为输入输出，并可以选择其类型，程序员只需要编写对应的map和reduce函数
+
+### 关于Hadoop
 * Hadoop 是一个实现了MapReduce 计算模型的开源分布式并行编程框架
 * Hadoop = HDFS+ MapReduce
 * Hadoop HDFS
@@ -28,12 +65,12 @@ categories: [tool, hadoop]
   * 分布式、面向__列__的开源数据库
   * 适合于非结构化数据存储
 
-## java.lang.OutOfMemoryError: GC overhead limit exceeded
+### java.lang.OutOfMemoryError: GC overhead limit exceeded
   * 在hadoop上跑canopy聚类的时候，发生错误`java.lang.OutOfMemoryError: GC overhead limit exceeded`,虽然继续运行，但是后来又抛出`heap size overflow`，可见是程序占用堆空间太多，又释放不掉的缘故
   * 这个错误主要是说，GC一直在忙着回收堆上的垃圾，占用大量cpu(>98%)，但是回收效率极低(<2%)
   * 也就是说程序已经没有什么进展，一直在忙着回收垃圾，为了避免这种浪费，jvm抛出错误
 
-## Hadoop 权限问题
+### Hadoop 权限问题
   * 刚搭建好hadoop，发现除hduser之外的账户不能跑hadoop，权限问题
   * 需要用hduser账户把其他要运行hadoop程序的账户添加到hdfs上，具体方法是在hdfs上新建用户工作目录
     
@@ -41,7 +78,7 @@ categories: [tool, hadoop]
     hadoop fs -mkdir /user/uname // 创建用户工作目录
     hadoop fs -chown -R uname:group /user/uname //修改权限
 
-## Connection refused 
+### Connection refused 
 * hadoop突然不能跑了，报错大致如下:
 `Call to localhost/127.0.0.1:54310 failed on connection exception: java.net.ConnectException: Connection refused`
 使用`jps`一看，namenode没有启动，原来是自己删了hadoop.tmp.dir,之后没有重新格式化namenode，导致namenode启动不了，重新格式化，`hadoop namenode -format`后启动`start-all.sh`，成功~
