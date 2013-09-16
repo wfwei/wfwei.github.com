@@ -6,9 +6,37 @@ categories: [skill, java]
 
 记录Java的常用技巧
 
->Java中没有逗号运算符
+###Top
+1. Java中没有逗号运算符
+1. `new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));`
 
-### java中的‘引用传递’
+### 内部匿名类
+
+不用显式地声明，而是直接构造一个类，并生成一个该类的对象，这样类就称为匿名类
+
+匿名类没有定义名字，构造后不能再被调用，所以在构造的时候就生成一个该类的对象
+
+匿名类须要‘基于’其他已有的非final的**类或接口**，如使用`java.util.Comparator`接口构造内部类对象：
+
+    new java.util.Comparator<Integer>(){
+        @Override
+        public int compare(Integer o1, Integer o2) {
+            // TODO Auto-generated method stub
+            return 0;
+        }
+    };
+
+使用`java.lang.Runnable`接口的例子：
+
+    Runnable r = new Runnable(){
+        @Override
+        public void run() {
+            // TODO Auto-generated method stub
+        }
+    };
+    r.run();
+
+### 小心java中的‘引用传递’
 
 最近写递归程序经常要回朔变量的状态，这时候，如果变量不是Immutable的，就一定要注意要构建新对象
 
@@ -74,20 +102,22 @@ equals方法继承于Object类中，在Object类中，equals方法比较的是**
         return (this == obj);
     }
 
-额，有引用了大量源码。。。
+额，又引用了大量源码。。。
 
 
 ###容器排序
 
-List
-    * Java中没有排序的List，因为List本来就是有序了，如LinkedList是按照插入顺序排的，ArrayList固定了顺序，如果想改变顺序可以使用collections.sort(...)方法；
-    * 如果有动态排序需求，可以使用优先队列PriorityQueue，如果要求容器大小固定，可以使用TreeSet来手动实现，如果还需要元素可以重复，可以考虑死用Guava包中的相关实现
+**List**
 
-Map
-    * Sort by keys, 使用SortedMap, 如TreeMap
-    * Sort by values, 只能把map转化成list(`map.entrySet()`)，对list进行排序(`Collections.sort(...)`)，之后再插入到map(如LinkedHashMap,保持插入顺序)中
+Java中没有排序的List，因为List本来就是有序了，如LinkedList是按照插入顺序排的，ArrayList固定了顺序，如果想改变顺序可以使用collections.sort(...)方法；
 
-Gists
+如果有动态排序需求，可以使用优先队列PriorityQueue，如果要求容器大小固定，可以使用TreeSet来手动实现，如果还需要元素可以重复，可以考虑使用Guava包中的相关实现
+
+**Map**
+
+* Sort by keys, 使用SortedMap, 如TreeMap
+* Sort by values, 只能把map转化成list(`map.entrySet()`)，对list进行排序(`Collections.sort(...)`)，之后再插入到map(如LinkedHashMap,保持插入顺序)中
+
     // sort reverse map by length of value
     List<Entry<String, Set<String>>> revIdxList = new LinkedList<Entry<String, Set<String>>>(
             revIdxMap.entrySet());
@@ -114,12 +144,6 @@ Gists
 ###eclipse中调用java的命令一般是：
 
     /usr/local/java/jre1.7.0_07/bin/java -Xmx1500m -Dfile.encoding=UTF-8 -classpath /media/Ubuntu/wksp/eclipse_wksp/BaiduReco/bin:/media/Ubuntu/wksp/eclipse_wksp/BaiduReco/lib/commons-collections-3.2.1.jar:/media/Ubuntu/wksp/eclipse_wksp/BaiduReco/lib/commons-configuration-1.7.jar:/media/Ubuntu/wksp/eclipse_wksp/BaiduReco/lib/log4j-1.2.16.jar baidu.zjl.train.ZjlTrain
-
-###Java IO
-
-Java读写文件如果想设置编码，就要使用Stream相关的读写类
-
-    `new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
 
 ###传值vs传引用
 
@@ -177,6 +201,3 @@ java中参数传递都可以看成值传递，primivte的参数就不用说了�
         }
         return false;
     }
- 
-
-

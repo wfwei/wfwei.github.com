@@ -10,8 +10,8 @@ categories: [ml, classification]
 
 二类分类线性模型:
 
-$$ f(x)=sign(w^Tx+b) \\$$
-$$ sign(x)=\begin{cases}1, & \text{ if } x>=0 \\ -1, & \text{ if } x<0 \end{cases} $$
+$$ f(x)=sign(w^Tx+b) \\
+sign(x)=\begin{cases}1, & \text{ if } x>=0 \\ -1, & \text{ if } x<0 \end{cases} $$
 
 损失函数选择：
 
@@ -40,16 +40,27 @@ logistic函数起到了数据归一化作用，有效地打压了过大或过小
 
 __因此逻辑回归根据最大熵原理，使用极大似然做参数估计__:
 
-似然函数为:   
+
+对于每个观测点$$(x_i, y_i)$$，其概率可以表示为:
+
+$$
+p(x_i, y_i) = \left\{\begin{matrix}
+P(Y=1 \mid x_i) & if~y_i=1,\\ 
+P(Y=0 \mid x_i) & if~y_i=0
+\end{matrix}\right.
+$$
+
+因为$$y_i=0,1$$所以，可以改写上式为：
+
+$$ p(x_i, y_i) = P(Y=1 \mid x_i)^{y_i} \cdot P(Y=0 \mid x_i)^{1-y_i} $$
+
+对所有观测点进行极大似然估计，即：
 
 $$ max ~ \prod_{i=1}^{N} [P(Y=1 \mid x_i)]^{y_i}[P(Y=0 \mid x_i)]^{1-y_i} $$
 
-其中$$ {\color{Red} P(Y=1 \mid x)=Logistic(w^Tx)} $$ ，相应的 $$ P(Y=0 \mid x)=1-P(Y=1 \mid x) $$
+其中$$ P(Y=1 \mid x)=Logistic(w^Tx) $$ ，相应的 $$ P(Y=0 \mid x)=1-P(Y=1 \mid x) $$
 
 可以看出，似然函数的设计巧妙的实现了所有数据出现的概率的乘积(之所以是乘积而不是累加是为了使用对数做简化)
-
-对于条件概率$$P(Y=1 \mid x)=Logistic(w^Tx)$$，不是很好理解，我认为Logistic函数本身的值域是(0,1)，所以很适合做概率函数，甚至在李航博士的书中就是用这个条件概率来定义二项逻辑回归问题的
-
 
 化简后得:   
 

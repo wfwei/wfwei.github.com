@@ -56,9 +56,9 @@ $$ J(\theta) = \frac{1}{2} \sum_{i=1}^{m} ( h_\theta(x^{(i)}) - y^{(i)}  )^2 $$
 
 具体算法包括：[梯度下降](/posts/gradient-descent/)和[牛顿法](/posts/newton-method/)
 
-####2. The Normal Equations 等式求解
+#### 2. The Normal Equations 等式求解
 
-该方法不再像最小均方法一样迭代求解，而是直接令导数为0求极值，即求解$ \frac{\partial J(\theta)}{\partial \theta} = 0 $
+该方法不再像最小均方法一样迭代求解，而是直接令导数为0求极值，即求解$$ \frac{\partial J(\theta)}{\partial \theta} = 0 $$
 
 向量表示J为：
 
@@ -73,11 +73,19 @@ $$
 
 $$
 \begin{aligned}
-\nabla_\theta J 
-&= \nabla_\theta(\frac12 (X\theta-\vec{y})^T(X\theta-\vec{y})) \\
+\nabla_\theta J
+&= \nabla_\theta \frac12(X\theta-\vec{y})^T(X\theta-\vec{y}) \\
+&= \frac12 \nabla_\theta (\theta^T X^T-\vec{y}^T)(X\theta-\vec{y}) \\
+&= \frac12 \nabla_\theta (\theta^T X^T X\theta-\vec{y}^TX\theta -\theta^T X^T \vec{y} + \vec{y}^2) \\
+&= \frac12 \nabla_\theta tr(\theta^T X^T X\theta - \vec{y}^T X \theta -\theta^T X^T \vec{y} + \vec{y}^2) \\
+&= \frac12 \nabla_\theta (tr \theta^T X^T X\theta - tr~\vec{y}^TX\theta - tr \theta^T X^T \vec{y}) \\
+&= \frac12 \nabla_\theta (tr \theta^T X^T X\theta - 2 tr~\vec{y}^TX\theta) \\
+&= \frac12 ( 2 X^T X\theta - 2 X^T \vec{y}) \\
 &= X^TX\theta-X^T \vec{y}
 \end{aligned}
 $$
+
+其中，第三步中，‘标量’的导数等于其秩的导数；第四步中，去掉了常数项；第五步合并相等的两个秩；第七步参考这里[这里](posts/ml-math/#section-1)
 
 令梯度为0得：
 
@@ -93,7 +101,7 @@ $$
 1. 公式中存在矩阵求逆操作，时间复杂度很高，不适合大数据下求解
 2. 求逆要求矩阵非奇异，尤其对于稀疏数据来说，需要注意这点
 
-### 概率角度解释最小平方代价函数J的合理性
+### 概率角度解释最小平方代价函数的合理性
 
 假设对于每个目标变量y和自变量x，存在如下关系：
 
@@ -112,16 +120,16 @@ $$
 则有:
 
 $$
-p(y^{(i)} \mid x{(i)};\epsilon^{(i)})=\frac{1}{\sqrt{2\pi} \sigma} exp\{ - \frac{( y^{(i)}-\theta^Tx^{(i)} )^2}{2\sigma^2} \}
+p(y^{(i)} \mid x^{(i)};\theta)=\frac{1}{\sqrt{2\pi} \sigma} exp\{ - \frac{( y^{(i)}-\theta^Tx^{(i)} )^2}{2\sigma^2} \}
 $$
 
-其中，$$p(y^{(i)} \mid x{(i)};\epsilon^{(i)})$$ 表示 $$y^{(i)}$$ 关于 $$x^{(i)}$$ 的条件概率，$$\theta$$ 是参数，而不是变量！
+其中，$$p(y^{(i)} \mid x{(i)};\theta)$$ 表示 $$y^{(i)}$$ 关于 $$x^{(i)}$$ 的条件概率，$$\theta$$ 是参数，而不是变量！
 
 在训练数据集上使用极大似然估计得：
 
 $$
-\max L(\theta)\\
 \begin{aligned}
+\max & L(\theta) \\
 L(\theta) &= \prod_{i=1}^m p(y^{(i)}|x{(i)};\epsilon^{(i)})\\
 &= \prod_{i=1}^m \frac{1}{\sqrt{2\pi} \sigma} exp\{ - \frac{( y^{(i)}-\theta^Tx^{(i)} )^2}{2\sigma^2}\}
 \end{aligned}
@@ -138,9 +146,9 @@ $$
 \end{aligned}
 $$
 
-这样，$$\max \mathcal{L(\theta)}$$等价于：
+这样:
 
-$$ \min_\theta \frac{1}{2} \sum_{i=1}^m ( y^{(i)}-\theta^Tx^{(i)} )^2 $$
+$$\max \mathcal{L(\theta)} \sim \min_\theta \frac{1}{2} \sum_{i=1}^m ( y^{(i)}-\theta^Tx^{(i)} )^2 $$
 
 这也是最小二乘的代价方程！
 
