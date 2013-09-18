@@ -7,8 +7,19 @@ categories: [skill, java]
 记录Java的常用技巧
 
 ###Top
+
 1. Java中没有逗号运算符
 1. `new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));`
+
+### 关于char
+
+`C`语言里面，`char`类型是1个字节的，用来表示`ASCII`字符，`ASCII`字符有128个，这样7个bit就能表示了，最高位被空了出来，可以将其做为符号位，这样设计的char就是带符号的(相当与1字节的int)，当然也可以设计成不带符号的，即最高位空为0,或做其他用途，这是由编译器设计决定的，有的编译器会提供选项，选择char的具体实现
+
+目前测试了`GCC`和`VS2010`上都默认是`signed char`
+
+以前都没在意，Java的字符类型采用的是`UTF-16`编码方式对`Unicode`编码表进行表示。其中一个`char`类型固定2Bytes（16bits）。
+
+为了兼容`ASCII`编码，将所有`ASCII`字符都按顺序放在了[0-127]之间
 
 ### 内部匿名类
 
