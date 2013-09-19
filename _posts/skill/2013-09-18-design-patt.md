@@ -3,7 +3,7 @@ layout: post
 title: 设计模式
 Author: wfwei - cf.wfwei@gmail.com
 Last modified: 2013-09-18 14:56:07
-categories:[skill]
+categories: [skill]
 ---
 
 ###单例模式(Singleton)

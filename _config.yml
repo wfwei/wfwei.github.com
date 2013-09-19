@@ -1,16 +1,14 @@
 markdown: kramdown
 pygments: true
 permalink: /posts/:title
-auto: true
 rdiscount:
   extensions: [smart]
-title :  Note.Markdown
-production_url : http://wfwei.github.io
+title:  Note.Markdown
+production_url: http://wfwei.github.io
 disqus_shortname: wfwei 
 analytics: UA-30211938-1
 gauges: 
-author : 
-  name : FengweiWang
-  github : wfwei 
-  twitter : wfwei
-future: false
+author: 
+  name: FengweiWang
+  github: wfwei 
+  twitter: wfwei
