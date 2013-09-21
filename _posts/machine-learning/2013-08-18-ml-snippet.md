@@ -1,10 +1,16 @@
 ---
 layout: post
-title: "统计机器学习Snippets"
+title: "机器学习Snippets"
 categories: [ml, snippets]
 ---
 
-摘录统计机器学习相关的一些碎片知识
+摘录机器学习相关的一些碎片知识
+
+###凸函数 Convex Function
+
+>A function is called convex if the function lies below the straight line segment connecting two points, for any two points in the interval.
+
+这样，'any local minimum is global minimum'
 
 
 ###正则化(Regularization) vs 归一化(Normalization)
