@@ -96,10 +96,78 @@ categories: [skill]
 
 最简单的方法就是使用所谓的‘简单工厂’模式：简单粗暴地将创建对象的代码封装到一个‘工厂’类中，之后在需要创建对象的地方，引入该工厂即可
 
-```
+    // 简单工厂 
+    public class SimplePizzaFactory {  
+      
+        // 这里的`createPizza`方法是成员方法，可以用来继承重写，如果不考虑多态，可以直接设成静态的
+        public Pizza createPizza(String type) {  
+            Pizza pizza = null;  
+      
+            if (type.equals("cheese")) {  
+                pizza = new CheesePizza();  
+            } else if (type.equals("pepperoni")) {  
+                pizza = new PepperoniPizza();  
+            } else if (type.equals("clam")) {  
+                pizza = new ClamPizza();  
+            } else if (type.equals("veggie")) {  
+                pizza = new VeggiePizza();  
+            }  
+            return pizza;  
+        }  
+    }
 
+    // 商店类，需要使用工厂方法
+    public class PizzaStore {  
+        SimplePizzaFactory factory;  
+       
+        public PizzaStore(SimplePizzaFactory factory) {   
+            this.factory = factory;  
+        }  
+       
+        public Pizza orderPizza(String type) { 
+            Pizza pizza;  
+       
+            pizza = factory.createPizza(type);
+       
+            pizza.prepare();  
+            pizza.bake();  
+            pizza.cut();  
+            pizza.box();  
+      
+            return pizza;  
+        }  
+    }
 
-```
+上面就完成了对创建对象的封装，可以创建各种各样的'pizza'，但这里有个问题，比如所有的`PizzaStore`都使用同一个工厂，得到全都相同的pizza，失去了定制性！
 
+为了赋予不同的‘PizzaStore’不同的定制‘Pizza’的权限，使用**工厂方法**模式：
+    
+    // 注意，这里类是抽象类
+    public abstract class PizzaStore {  
+        // 工厂方法，注意这里是abstract，要求子类必须实现
+        abstract Pizza createPizza(String item);  
+       
+        public Pizza orderPizza(String type) {  
+            Pizza pizza = createPizza(type);  
+            System.out.println("--- Making a " + pizza.getName() + " ---");  
+            pizza.prepare();  
+            pizza.bake();  
+            pizza.cut();  
+            pizza.box();  
+            return pizza;  
+        }  
+    }
 
+    public class NYPizzaStore extends PizzaStore {  
+        Pizza createPizza(String item) {  
+            // implements customized method
+        }  
+    }
 
+    public class BJPizzaStore extends PizzaStore {  
+        Pizza createPizza(String item) {  
+            // implements customized method
+        }  
+    }
+
+TODO 抽象工厂
