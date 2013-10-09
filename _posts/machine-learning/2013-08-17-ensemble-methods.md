@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "集成学习(Ensemble)"
+title: "集成学习方法(Ensemble Method)"
 category: posts
 ---
 
@@ -25,16 +25,16 @@ $$
 
 常见的集成学习方法有：Bootstrap Aggregating(缩写为Bagging)，提升算法 Boosting，随机森林 RandomForest
 
-##Bootstrap Aggregating(Bagging)
+### *B*ootstrap *Agg*regat*ing*(Bagging)
 
-首先理解Bootstrap，名字来自成语“pull up by your own bootstraps”，意思是依靠你自己的资源，称为自助法，它是一种有放回的抽样方法
+首先理解Bootstrap，名字来自成语“pull up by your own bootstraps”，意思是依靠你自己的资源，称为自助法，它是一种**有放回的抽样方法**
 
 1. 训练：每个基本分类器通过从数据集中随机出一部分学习得来
-2. 预测：每个分类器投票+多数表决
+2. 预测：每个分类器投票，之后多数表决
 
-##提升算法 Boosting
+### 提升算法 Boosting
 
-提升(boosting)算法是一种常用的统计学习方法，在分类问题中，通过改变分类样本的权重，学习多个分类器，并将这些分类器组合，提高分类性能。
+提升(boosting)算法是一种常用的统计学习方法，在分类问题中，通过**改变分类样本的权重**，学习多个分类器，并将这些分类器组合，提高分类性能。
 
 比较著名的提升算法有提升树模型(Boosting Tree)和自适应提升算法AdaBoost(Adaptive Boosting)，提升树模型是以决策树为基函数的提升算法，算是Adaboost的一种特例吧，下面主要介绍Adaboost算法
 
@@ -45,8 +45,7 @@ $$
 
 不改变所给训练数据，而不断改变训练数据的权值分布，使得训练数据在基本分类器的学习中起到不同作用，这是Adaboost的特点
 
-
-###理论基础:
+**理论基础:**
 
 在概率近似正确(Probably Approximately Correct, PAC)框架中，有两个概念：
 
@@ -56,12 +55,12 @@ $$
 后证明，在PAC框架下，强可学习和弱可学习是等价的，这也就意味着，可以组合多个弱分类器，构成强分类器
 
 
-###学习过程:
+**学习过程:**
 
 ![adaboost-train](/image/adaboost-train.png)
 
 
-###算法描述:
+**算法描述:**
 
 输入：弱学习算法以及训练数据$$ T={(x_1,y_1),(x_2,y_2),...,(x_N,Y_N)} $$，其中，实例$$x_i \in R^n$$，标记$$y_i \in \{-1,1\}$$  
 输出：强分类器G(x)
@@ -107,7 +106,7 @@ $$ D_1=(w_{1,1}, w_{1,2},...,w_{1,N}) ~,~ w_{1,i}=\frac{1}{N} ~,~ i=1,2,...,N$$
 
 
 
-###另一种解释:
+**另一种解释:**
 
 AdaBoost算法可以看作是：模型是加法模型，损失函数是指数函数，学习算法是分步向前算法时的二类分类算法
 

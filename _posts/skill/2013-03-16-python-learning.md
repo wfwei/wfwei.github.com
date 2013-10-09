@@ -5,8 +5,18 @@ categories: [skill, python]
 ---
 
 ###Basic Usage
-* python -c "import django; print(django.get_version())"
 
+* python -c "import django; print(django.get_version())"
+* `'afaAAA'.lower()`
+
+### Test
+
+字符串去除空格，回车，tab：
+
+1. `''.join('a A c'.split())`
+2. `'a A c'.replace(' ', '').replace('\n', '').replace('\t', '')`
+
+TODO 比较上面二者的效率
 
 ### Python re模块
 

@@ -6,6 +6,40 @@ category: other
 
 微薄分类阅读 +readweibo.com +weibo2read.com +weibotoread -weiboreader.com
 
+
+## 动机 MOTIVATION
+
+到底做什么？
+
+从最开始的需求出发，找到数据挖掘相关的人和微博
+
+
+**1. 先找到所有和机器学习相关的人**
+
+主要找两类人：广播者 和 收听者
+
+从自己的微博出发，找到关注的人中简介中含有机器学习相关关键字的用户，继续挖掘其粉丝和关注
+
+如果用户简介中直接提到数据挖掘相关的关键字，直接认定其就是机器学习相关的；否则，根据用户间的关注关系，判断一个用户是否是数据挖掘相关
+
+根据粉丝数量，微博数量等属性判断一个用户是广播者还是收听者
+
+
+数据挖掘关键词：
+
+`数据挖掘 data mining dm`
+`机器学习 machine learing ml `
+`自然语言处理 natual language process nlp`
+`搜索 search rank`
+`数据分析 data nanlysis`
+`机器翻译`
+`个性化 推荐技术 推荐系统 recommend system`
+`大数据 big data`
+`信息检索`
+`计算机视觉` 
+
+**2. 筛选数据挖掘相关的微博**
+
 ###用户分类：
 
 1. 认识的人(亲人，朋友，同学，同事)

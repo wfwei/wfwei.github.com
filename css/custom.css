@@ -127,6 +127,11 @@ div.navbar .navbar-inner .title{
   font-size:24px;
   color:#0088cc;
 }
+div.navbar .navbar-inner .words{
+  margin: 20px 20px 2px 0;
+  font-size: 15px;
+}
+
 div.navbar .navbar-inner .category{
   display: inline-block;
   margin-top:14px;
