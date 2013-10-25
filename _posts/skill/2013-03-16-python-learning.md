@@ -9,14 +9,83 @@ categories: [skill, python]
 * python -c "import django; print(django.get_version())"
 * `'afaAAA'.lower()`
 
-### Test
+### TODO 比较上面二者的效率
 
 字符串去除空格，回车，tab：
 
 1. `''.join('a A c'.split())`
 2. `'a A c'.replace(' ', '').replace('\n', '').replace('\t', '')`
 
-TODO 比较上面二者的效率
+### Note from <<Python Essential Reference>>
+
+    #python code
+
+    f = open("d://test.txt", "w")
+    print >>f, "Write to file directly"
+    print >>f, "Formate output %2d-%0.3f" % (1, 1.2131)
+    
+    # Simple iterate on any containers
+    for line in open("d://test.txt", "r"):
+        print line
+
+
+    # terminate program
+    raise SystemExit(0) 
+
+### Generator
+
+> Any function that uses 'yield' statement
+
+> Calling a generator function cre-ates an object that produces a sequence of results through successive calls to a next() method
+
+>The next() call makes a generator function run until it reaches the next yield state-ment. At this point, the value passed to yield is returned by  next(), and the function
+suspends execution.
+
+    def cntdown(n):
+        while n>0:
+            yield n
+            yield '...'
+            n -= 1
+    gen = cntdown(10)
+
+    print gen.next(), gen.next()
+    for next in gen:
+        print next
+
+> Generators are an extremely powerful way of writing programs based on processing pipelines, streams, or data flow.
+
+This python version of `grep` is as follow:
+
+    def grep(lines, searchtext):
+        for line in lines:
+            if searchtext in line:
+                yield line
+
+### Coroutines
+
+Also a 'Generator', but it processes a sequence of inputs sent to it
+
+It uses `(yield)` expression
+
+    def print_match(matchtext):
+        print 'Looking for %s' % matchtext
+        while True:
+            line = (yield)
+            if matchtext in line:
+                print line
+    matcher = print_match('python')
+    matcher.send('python is coooooool')
+    matcher.close()
+        
+
+
+### Implementation of Set and Dict
+
+http://svn.python.org/view/python/trunk/Objects/setobject.c?view=markup
+
+### Difference bettween `str() vs repr()`
+
+http://stackoverflow.com/questions/1436703/difference-between-str-and-repr-in-python
 
 ### Python re模块
 
