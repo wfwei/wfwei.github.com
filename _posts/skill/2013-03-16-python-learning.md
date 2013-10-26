@@ -4,10 +4,18 @@ title: "python learning"
 categories: [skill, python]
 ---
 
-###Basic Usage
+### print list of unicode strings
 
-* python -c "import django; print(django.get_version())"
-* `'afaAAA'.lower()`
+    lst = [u'\u00f1', u'\u00ff']
+    print lst # output not user friendly
+    print ','.join([i for i in lst])
+
+### String
+
+> In Python 2 string literals correspond to 8-bit character or byte-oriented data. A serious limitation of these strings is that they do not fully support international charac-ter sets and Unicode.To address this limitation, Python 2 uses a separate string type for Unicode data.To write a Unicode string literal, you prefix the first quote with the letter
+“u”. For example: `s = u"Jalape\u00f1o"` 
+
+> In Python 3, this prefix character is unnecessary (and is actually a syntax error) as all strings are already Unicode. Python 2 will emulate this behavior if you run the inter-preter with the -Uoption (in which case all string literals will be treated as Unicode and the u prefix can be omitted).
 
 ### TODO 比较上面二者的效率
 
@@ -16,7 +24,7 @@ categories: [skill, python]
 1. `''.join('a A c'.split())`
 2. `'a A c'.replace(' ', '').replace('\n', '').replace('\t', '')`
 
-### Note from <<Python Essential Reference>>
+###Basic Usage
 
     #python code
 
@@ -76,7 +84,6 @@ It uses `(yield)` expression
     matcher = print_match('python')
     matcher.send('python is coooooool')
     matcher.close()
-        
 
 
 ### Implementation of Set and Dict
