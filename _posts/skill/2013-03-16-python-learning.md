@@ -4,6 +4,195 @@ title: "python learning"
 categories: [skill, python]
 ---
 
+### Context Management Protocol
+
+> The `with` statement allows a sequence of statements to execute under the control of another object known as a context manager.
+
+### Callable Interface
+
+> An object can emulate a function by providing the __call__(self [,*args [, **kwargs]])method.
+
+    class DistanceFrom(object):
+        def __init__(self, origin):
+            self.origin = origin
+        def __call__(self, x):
+            return abs(x - self.origin)
+    nums = [1, 37, 101, -20, 9, 13]
+    nums.sort(key=DistanceFrom(10))
+
+### Object String Representatin
+
+`__str__(self)` create a simple string representation, called by the built-in `str()` function and by functions related to printing, user can customize the output(if undefined, use `__repr__()` instead)
+
+`__repr__(self)` create a string representing the object, called by the built-in `repr()` function,  if possible returns an expression string that can be evaluated to re-create the object, or returns a string in form "<...message...>"
+
+    a = [2,3,4] #create a list
+    a_restore = eval(repr(a)) # restore the list from the 'repr'
+
+    f = open("foo")
+    repr_str = repr(f) # can't re-create, return "<open file 'foo', mode 'r' at dc030>"
+
+
+`__format__(self, foramt_spec)` create a formated representation
+
+TODO not clear about this
+
+### Object Creation and Destruction
+
+* `__new__(cls [, *args [, **kwargs]])` class method called to create a new instance
+* `__init__(self [, *args [, **kwargs]])` called to initialize a new instance
+* `__del__(self)` called when an object is being destroyed
+
+    class Foo(object):
+        def __init__(self, para=10):
+            self.x = para
+
+    foo1 = Foo(10)
+    # equivalent with below
+    foo2 = Foo.__new__(Foo)
+    foo2.__init__(10)
+
+### Built-in types for representing Program Structure
+
+> In Python, functions, classes, and modules are all objects that can be manipulated as data.
+
+**Callable Types**  objects that support function call operation
+
+1. User-Defined Function : objects created at the module level by using the def statement or with the lambdaoperator.
+    
+    def foo(x, y):
+        return x+y
+    bar = lambda x, y: x+y
+
+2. Method : Functions that are defined inside a class definition. There are three common types of methods—instance methods, class methods, and static methods:
+
+    class Foo(object):
+
+        def instance_mothod(self, arg):
+            pass
+
+        @classmethod
+        def class_method(cls, arg):
+            pass
+
+        @staticmethod
+        def static_method(arg):
+            pass
+
+3. Built-in Functions and Methods : functions and methods implemented in C and C++. like `len()` `append()`
+
+
+### Data Types
+
+**None**
+
+this null object `None`
+
+**Numbers**
+
+`int`(32bit), `long`(unlimited range), `float`(64bit, IEEE 754), `complex`, `bool`
+
+*immutable*
+
+**Sequences**
+
+`str, tuple, list`
+
+`str` and `tuple` are immutable, while `list` allow insertion, deletion and substitution
+
+all support iteration
+
+shared operations: `s[i], s[i, j], len(s), max(s), min(s), all(s), any(s)`
+
+sum(s) sums items in s but only works for numeric data
+
+for mutable list, can use `del` remove elements: `del s[i:j]`
+
+**Mapping**
+
+dict
+
+key must be immutable
+
+**Sets**
+
+set, frozenset
+
+items must be immutable
+
+### First-Class Objects
+
+>All objects in Python are "first class", This means that all objects that can be named by an identifier have equal status. It also means that all objects that can be named can be treated as data. 
+
+    items = {}
+    items['func'] = abs
+    import math
+    items['module'] = math
+    nums = [1, 2, 3]
+    items['append'] = nums.append
+
+    # Just use the value in dict
+    items['func'](-12) # output 12
+    items['module'].sqrt(100) # output 10.0
+    items['append'](4) # append '4' to nums
+    
+
+### Reference Counting and Garbage Collection
+
+All objects are reference-counted, An object’s reference count is increased whenever it’s assigned to a new name or placed in a container such as a list, tuple, or dictionary
+
+An object’s reference count is decreased by the delstatement or whenever a reference goes out of scope (or is reassigned).
+
+`import sys ; sys.getrefcount(a)`
+
+### Reference and Copies
+
+>Any thing in python is `Object`
+
+`reference copy -> shallow copy --> deep copy`
+
+For immutable objects, like numbers and strings, simple reference copy is ok:
+
+    a = 10
+    b = a # b also points to 10
+    a = 100 # change a, b will not be affected
+
+But for normal objects, like containers or other mutable objects, there will be a 'problem':
+
+    a = [1,2]
+    b = a # make a reference copy of a
+    b[0] = 10 # change b, a will get affected which may not in your will
+
+Then consider the 'shallow copy'
+
+    a = [1,2, [3,4]]
+    b = list(a) # make a new list that contains all **objects** in a
+    b[0] = 10 # change immutable objects in b, a will not get affected
+    b[2][0] = 30 # change mutable objects in b, a will get affected
+
+What if you want a completely copy than no one affects the other? use 'Deep copy'
+
+    import copy
+    a = [1, 2, [3, 4]]
+    b = copy.deepcopy(a) # deep copy of a
+    b[2][0] = 30 # will not affect a
+
+
+### Compare Two objects
+
+def compare(a, b):
+    if a is b:
+        # a and b are the same object
+        pass
+    if a == b:
+        # a and b have the same value
+        pass
+    if typa(a) is type(b):
+        # a and b have the same type
+        pass
+    if isinstance(a, b):
+        # a and b have the same type, inheritance considered
+
 ### print list of unicode strings
 
     lst = [u'\u00f1', u'\u00ff']

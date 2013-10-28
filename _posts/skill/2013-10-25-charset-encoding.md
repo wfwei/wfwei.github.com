@@ -6,9 +6,14 @@ categories: [skill, charset, encoding]
 
 ### Python中的编码
 
-`Python 2`中，基本字符串(`string`)类型是由`8 bit`的字符组成，为了满足国际化的需求，设计支持`unicode`字符集，从而添加了另外一种字符串类型`unicode string`(在引号前加一个`u`标识)
+`Python 2`中，有两种字符串类型：字节字符串（byte string）和Unicode字符串
 
-`unicode string`本身’无编码‘，只是定义了包含的unicode字符序列（比如在unicode字符集中的位置），但是`unicode string`也要存储，就必须涉及以何种编码方式存储，但这个是完全对用户透明的，用户无法知道，也不必知道。
+>Byte strings are sequences of bytes containing 8-bit data.
+>Unicode strings are sequences of unencoded Unicode characters, which are internally represented by 16-bit integers.
+
+字节字符串(`string`)类型是由`8 bit`常的字节数据组成，为了满足国际化的需求(不同字符集编码之间的转换)，`python`设计支持`unicode`字符集，从而添加了另外一种字符串类型`unicode string`(在引号前加一个`u`标识)
+
+`unicode string`本身’无编码‘，只是定义了包含的unicode字符序列（比如在unicode字符集中的位置），但是`unicode string`也要存储，这就必须涉及以何种编码方式存储，但这个是完全对用户透明的，用户无法知道，也不必知道。(和Java的存储方式一致)
 
 由于unicode字符集是其他字符集(ASCII, GBK, BIG5等）的合集，任何其他字符集都可以用unicode表示（只需要定义一种映射规则而已），而`unicode string`则是定义在`unicode`字符集上的字符表示形式，具有很强的跨平台性，其他编码都可以通过unicode方便的转化，所以很多语言都使用unicode字符集作为默认字符集，如Java和python
 
@@ -18,7 +23,7 @@ categories: [skill, charset, encoding]
 
 我们知道unicode字符串中含有中文，可以选择诸如`utf-8, utf-16, gbk, gb2312`等含有（简体）中文的字符集（编码方式），如`f.write(u_str.encode('utf-8'))` 或 `f.write(u_str.encode('gbk')`
 
-对于基本字符串，创建时其编码就确定了，一般为平台默认的编码，如中文windows默认是gbk，英文Linux默认是utf-8，
+对于字节字符串，创建就必须确定编码方式，以字节码的形式保存，编码方式默认使用平台的编码，如中文windows是gbk，英文Linux是utf-8，
 
 以中文Windows系统为例，假如默认编码是`gbk`，创建字符串`str='中文'`后，`str`已经是`gbk`编码后的字符串，所以可以直接写到文件中`f.write(str)`，查看文件的16进制内容为`D6D0B9FA`，这就是’中文‘二字的`gbk`码，如果我们想得到`str`的unicode字符串，需要对其解码`str.decode('gbk')`
 
@@ -29,7 +34,7 @@ python中字符串，包括unicode字符串，有两个编码（encode）/解码
 
 示例代码如下：
 
-    str = '中文' #基本字符串，带平台默认编码
+    str = '中文' #字节字符串，带平台默认编码
     u_str = u'中文' #unicode字符串，’无编码‘，等价于 u'\u4e2d\u6587' 
     str.decode('gbk') #编程unicode字符串，等价于u_str
     u_str.encode('gbk') #使用gbk编码，等价于str
